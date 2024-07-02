@@ -1,0 +1,43 @@
+import type { Knex } from 'knex';
+import { User } from '../models/user-table';
+import { Common } from '../models/common';
+import { Post } from '../models/post-table';
+import { Comment } from '../models/comment-table';
+import { React } from '../models/react-table';
+
+export async function up(knex: Knex): Promise<void> {
+  return knex.schema.createTable(React.TableName, function (table) {
+    table.bigIncrements().unsigned();
+    table
+      .bigInteger(React.Column.ReactorUserId)
+      .notNullable()
+      .unsigned()
+      .references(User.Column.Id)
+      .inTable(User.TableName)
+      .onDelete(Common.Rules.Cascade)
+      .onUpdate(Common.Rules.Cascade);
+    table
+      .bigInteger(React.Column.PostId)
+      .nullable()
+      .unsigned()
+      .references(Post.Column.Id)
+      .inTable(Post.TableName)
+      .onDelete(Common.Rules.Cascade)
+      .onUpdate(Common.Rules.Cascade);
+    table
+      .bigInteger(React.Column.CommentId)
+      .nullable()
+      .unsigned()
+      .references(Comment.Column.Id)
+      .inTable(Comment.TableName)
+      .onDelete(Common.Rules.Cascade)
+      .onUpdate(Common.Rules.Cascade);
+    // default length 255
+    table.string(React.Column.ReactType).nullable();
+    table.timestamps();
+  });
+}
+
+export async function down(knex: Knex): Promise<void> {
+  return knex.schema.dropTableIfExists(React.TableName);
+}

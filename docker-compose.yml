@@ -1,0 +1,23 @@
+services:
+  some-mariadb:
+    image: mariadb:11.2.4-jammy
+    volumes:
+      - ${HOME}/docker/socially-app/volume:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  backend:
+    build:
+      context: ./backend
+      target: build
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app/
+      - /app/node_modules
+    ports:
+      - 4000:4000
+    depends_on:
+      - some-mariadb
+    command: npm run dev
