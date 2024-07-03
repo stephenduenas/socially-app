@@ -1,9 +1,9 @@
-import express, { Express, Request, Response } from 'express';
-
-const app: Express = express();
+import { Request, Response } from 'express';
+import app from './app';
+// const app: Express = express();
 
 app.get('/', (req: Request, res: Response) => {
-  res.status(200).json('Hello from the server!!!sasd');
+  res.status(200).json('Hello from the server!!!');
 });
 
 app.listen(4000, () => {

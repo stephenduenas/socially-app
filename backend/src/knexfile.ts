@@ -1,62 +1,22 @@
-import type { Knex } from 'knex';
+import { knex, type Knex } from 'knex';
 
-// Update with your config settings
-
-interface IConfiguration {
-  [key: string]: Knex.Config;
-}
-
-const config: IConfiguration = {
-  development: {
-    client: 'mysql',
-    connection: {
-      host: 'localhost',
-      user: 'root',
-      password: 'root',
-      database: 'socially_app_test',
-      port: 3306,
-    },
-    migrations: {
-      directory: './db/migrations',
-      tableName: 'knex_migrations',
-      extension: 'ts',
-    },
-    seeds: {
-      directory: './seeds',
-    },
+const config: Knex.Config = {
+  client: process.env.DB_CONNECTION,
+  connection: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: 3306,
   },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-    },
+  migrations: {
+    directory: './db/migrations',
+    tableName: 'knex_migrations',
+    extension: 'ts',
   },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-    },
+  seeds: {
+    directory: './seeds',
   },
 };
 
-module.exports = config;
+export const db = knex(config);
