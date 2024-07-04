@@ -1,13 +1,9 @@
-/* app.ts */
-
-// global dependencies
-import cors from 'cors';
-
-// project dependencies
-import routes from './routes';
-
-// set express app
+import 'express-async-errors';
 import express from 'express';
+import cors from 'cors';
+import routes from './routes';
+import { errorHandler } from './middlewares/ErrorHandler';
+
 const app = express();
 
 // cors
@@ -27,5 +23,7 @@ app.use(express.json());
 
 // routes
 app.use(routes);
+
+app.use(errorHandler);
 
 export default app;
