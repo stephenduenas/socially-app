@@ -1,3 +1,4 @@
-import * as UserService from '../services/User';
+import * as UserService from './User.service';
+import * as PostService from './Post.service';
 
-export { UserService };
+export { UserService, PostService };

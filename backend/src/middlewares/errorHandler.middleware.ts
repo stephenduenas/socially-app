@@ -26,7 +26,7 @@ const formatZodError = (err: ZodError) => {
   return [formattedError];
 };
 
-export const errorHandler = (
+export const errorHandlerMiddleware = (
   err: Error,
   req: Request,
   res: Response,

@@ -4,9 +4,9 @@ const TABLE_NAME = 'post';
 
 export interface TPost extends ITimestamps {
   id: number;
-  user_id: string;
+  user_id: number;
   image_path: string;
-  caption: string;
+  caption: string | undefined;
 }
 
 const Column = {

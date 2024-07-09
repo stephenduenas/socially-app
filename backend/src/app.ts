@@ -2,7 +2,7 @@ import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
-import { errorHandler } from './middlewares/ErrorHandler';
+import { errorHandlerMiddleware } from './middlewares/errorHandler.middleware';
 
 const app = express();
 
@@ -24,6 +24,6 @@ app.use(express.json());
 // routes
 app.use(routes);
 
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 export default app;

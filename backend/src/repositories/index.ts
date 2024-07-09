@@ -1,3 +1,4 @@
-import * as UserRepository from './User';
+import * as UserRepository from './User.repository';
+import * as PostRepository from './Post.repository';
 
-export { UserRepository };
+export { UserRepository, PostRepository };
